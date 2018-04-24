@@ -12,13 +12,13 @@ public class GraphNode<T> {
 		this.data = data;
 	}
 	
-	public void connectToNodeDirected(GraphNode<T> destNode, int cost) {
-		adjList.add(new GraphLink(destNode,cost));
+	public void connectToNodeDirected(GraphNode<T> destNode, double length, char speed) {
+		adjList.add(new GraphLink(destNode,length, speed));
 	}
 	
-	public void connectToNodeUndirected(GraphNode<T> destNode, int cost) {
-		adjList.add(new GraphLink(destNode, cost));
-		destNode.adjList.add(new GraphLink(this, cost));
+	public void connectToNodeUndirected(GraphNode<T> destNode, double length, char speed) {
+		adjList.add(new GraphLink(destNode, length, speed));
+		destNode.adjList.add(new GraphLink(this, length, speed));
 	}
 	
 	public static <T> Dijkstra findCheapestPathDijkstra(GraphNode<?> startNode, T lookingFor) {
@@ -59,7 +59,7 @@ public class GraphNode<T> {
 			
 			for(GraphLink e : currentNode.adjList)
 				if(!encountered.contains(e.destNode)) {
-					e.destNode.nodeValue=Integer.min(e.destNode.nodeValue, currentNode.nodeValue+e.cost);
+					e.destNode.nodeValue=Integer.min(e.destNode.nodeValue, (int) (currentNode.nodeValue+e.cost));
 					unencountered.add(e.destNode);
 				}
 			Collections.sort(unencountered,(n1,n2)->n1.nodeValue-n2.nodeValue);
