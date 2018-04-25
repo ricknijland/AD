@@ -2,7 +2,6 @@ import java.io.FileNotFoundException;
 
 public class Main {
 
-<<<<<<< HEAD
 	public static void main(String[] args) throws FileNotFoundException {
 		CityList cities = new CityList();
 		for(int i = 0; i < cities.size(); i++) {
@@ -21,10 +20,6 @@ public class Main {
 			System.out.println(z.data);
 		}
 		System.out.printf("Total time: %.2f minutes.", quickest.pathCost);
-=======
-	public static void main(String[] args) {
-		
->>>>>>> 713a5bb397fe8743530e7c614fe3638ef57f3d1a
-	}
 
+	}
 }
