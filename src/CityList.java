@@ -9,10 +9,15 @@ public class CityList {
 	private String[] CSVdata;
 	private List<GraphNode<?>> cities = new ArrayList<>();
 	private boolean first, second;
+	private Scanner sc;
 
 	@SuppressWarnings("unchecked")
 	public CityList() throws FileNotFoundException {
-		Scanner sc = new Scanner(new File("C:\\Users\\TJ\\OneDrive\\Documents\\MapOfIreland.csv"));
+		try {
+			sc = new Scanner(new File("C:\\Users\\Rick\\eclipse-workspace\\CA2\\MapOfIreland.csv"));
+		} catch(FileNotFoundException e) {
+			System.out.println("File not found!");
+		}
 		sc.nextLine(); //Skip first line of headers
 		while(sc.hasNext()) {
 			CSVdata = sc.nextLine().split(",");
