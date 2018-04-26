@@ -23,7 +23,7 @@ public class Dijkstra {
 					boolean foundPrevPathNode=false;
 					for(GraphNode<?> n : encountered) {
 						for(GraphLink e : n.adjList) {
-							if(e.destNode==currentNode && currentNode.nodeValue-e.time==n.nodeValue) {
+							if(e.destNode==currentNode && currentNode.nodeValue-(int)e.time==n.nodeValue) {
 								cp.pathList.add(0,n);
 								currentNode=n;
 								foundPrevPathNode=true;
@@ -42,7 +42,7 @@ public class Dijkstra {
 			
 			for(GraphLink e : currentNode.adjList)
 				if(!encountered.contains(e.destNode)) {
-					e.destNode.nodeValue=Double.min(e.destNode.nodeValue, currentNode.nodeValue+e.time);
+					e.destNode.nodeValue=Integer.min((int)(e.destNode.nodeValue), (int)(currentNode.nodeValue+e.time));
 					unencountered.add(e.destNode);
 				}
 			Collections.sort(unencountered,(n1,n2)->(int)(n1.nodeValue-n2.nodeValue));
@@ -70,7 +70,7 @@ public class Dijkstra {
 					boolean foundPrevPathNode=false;
 					for(GraphNode<?> n : encountered) {
 						for(GraphLink e : n.adjList) {
-							if(e.destNode==currentNode && currentNode.nodeValue-e.length==n.nodeValue) {
+							if(e.destNode==currentNode && currentNode.nodeValue-(int)e.length==n.nodeValue) {
 								cp.pathList.add(0,n);
 								currentNode=n;
 								foundPrevPathNode=true;
@@ -89,7 +89,7 @@ public class Dijkstra {
 			
 			for(GraphLink e : currentNode.adjList)
 				if(!encountered.contains(e.destNode)) {
-					e.destNode.nodeValue=Double.min(e.destNode.nodeValue, currentNode.nodeValue+e.length);
+					e.destNode.nodeValue=Integer.min((int)(e.destNode.nodeValue), (int)(currentNode.nodeValue+e.length));
 					unencountered.add(e.destNode);
 				}
 			Collections.sort(unencountered,(n1,n2)->(int)(n1.nodeValue-n2.nodeValue));//FIXME
