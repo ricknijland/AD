@@ -1,0 +1,210 @@
+ROAD,LENGTH,NODE1,NODE2
+N56,44.6,Dunfanaghy,Dungloe
+N56,56.1,Dungloe,Donegal
+N13,22.5,Ballybofey,Letterkenny
+N15,27.9,Donegal,Ballybofey
+N56,34.6,Letterkenny,Dunfanaghy
+N15,29,Bundoran,Donegal
+N15,6.6,Bundoran,Cliffony
+N15,23.6,Cliffony,Sligo
+N4,8.4,Sligo,N59/N4 Intersection
+N59,51.1,Ballina,N59/N4 Intersection
+N59,43.5,Ballina,Bangor Erris
+N59,61.8,Bangor Erris,Westport
+N26,16.5,Ballina,Foxford
+N59,52,Westport,Letterfrack
+N59,14.2,Letterfrack,Clifden
+N59,77.2,Clifden,Galway
+N58,10,Foxford,N5/N58 Split
+N5,11.9,Castlebar,N5/N58 Split
+N5,17.3,N26/N5 Split,N5/N58 Split
+N26,12.9,N26/N5 Split,Foxford
+N5,18,Westport,Castlebar
+N84,76.3,Castlebar,Galway
+N4,8.6,N4/N17 Intersection,N59/N4 Intersection
+N17,35.8,N5/N17 Intersection,N4/N17 Intersection
+N5,12.1,N26/N5 Split,N5/N17 Intersection
+N60,25.8,Castlebar,Claremorris
+N17,7.8,N5/N17 Intersection,N17/N83 Split
+N17,24.2,Claremorris,N17/N83 Split
+N83,15.5,Ballyhaunis,N17/N83 Split
+N60,18.1,Claremorris,Ballyhaunis
+N83,32.5,Tuam,Ballyhaunis
+N17,28.8,Tuam,Claremorris
+N17,33.6,Tuam,Galway
+N6,15.1,Galway,N6/M6/N67 Intersection
+M6,11.7,M6/M17/M18 Intersection,N6/M6/N67 Intersection
+M17,14.6,Tuam,M17/N63 Intersection
+M17,13.3,M6/M17/M18 Intersection,M17/N63 Intersection
+N4,27,N4/N17 Intersection,N4/N61 Intersection
+N4,15.2,Carrick-On-Shannon,N4/N61 Intersection
+N61,27.4,Tulsk,N4/N61 Intersection
+N5,43,Tulsk,N5/N17 Intersection
+N5,34.2,Tulsk,Longford
+N4,36.7,Carrick-On-Shannon,Longford
+N61,19.2,Tulsk,Roscommon
+N61,31.1,Athlone,Roscommon
+N63,31.9,Mountbellew,Roscommon
+N63,24.8,Mountbellew,M17/N63 Intersection
+N60,17.5,Castlerea,Roscommon
+N60,20.6,Ballyhaunis,Castlerea
+N4,14.8,Longford,Edgeworthstown
+N55,41.3,Athlone,Edgeworthstown
+N63,31.1,Longford,Roscommon
+N16,45.6,Sligo,N16/R206 Intersection
+R206,14.8,Glangevlin,N16/R206 Intersection
+R200,13.8,Glangevlin,R200/N87 Intersection
+N87,22.6,Belturbet,R200/N87 Intersection
+N3,9.2,Belturbet,N23/N3 Intersection
+N23/A3,41.6,N23/N3 Intersection,Monaghan
+N3,4.5,N3/R188 Intersection,N23/N3 Intersection
+R188,3.1,N3/R188 Intersection,Cavan
+Ballinagh Rd,3,Cavan,Ballinagh Rd/N55 Intersection
+N55,2.9,Ballinagh Rd/N55 Intersection,N3/N55 Intersection
+N3,3.5,N3/N55 Intersection,N3/R188 Intersection
+N55,43,Ballinagh Rd/N55 Intersection,Edgeworthstown
+N4,29.3,Mullingar,Edgeworthstown
+N2,22.9,Monaghan,Castleblayney
+N23/A37,28.3,Dundalk,Castleblayney
+N2,38.9,Ardee,Castleblayney
+N52,19.8,Ardee,Dundalk
+N52,29.5,Ardee,Kells
+N3,45.8,Kells,N3/N55 Intersection
+N52,22,Kells,Delvin
+N52,20.2,Delvin,Mullingar
+N4,18.9,Mullingar,Kinnegad
+N2,19.6,Ardee,Slane
+N51,13.8,Drogheda,Slane
+M1,17.7,Drogheda,M1/N33 Intersection
+N33,8.6,Ardee,M1/N33 Intersection
+M1,17.3,Dundalk,M1/N33 Intersection
+N52,17.3,Mullingar,N52/M6 Intersection
+M6,21,Kinnegad,N52/M6 Intersection
+M6,65.8,M6/M17/M18 Intersection,M6/N65 Intersection
+M6,26.1,R446/M6 Intersection,M6/N65 Intersection
+R446,2.2,R446/M6 Intersection,Ballinasloe
+R357,4.6,Ballinasloe,M6/R357 Intersection
+M6,5.3,R446/M6 Intersection,M6/R357 Intersection
+M6,23.3,Athlone,M6/R357 Intersection
+M6,34.1,Athlone,M6/N52 Intersection
+M6,37.6,N52/M6 Intersection,M6/N52 Intersection
+M4,59.5,M4/M50 Intersection,Kinnegad
+N2/M2,45.6,Slane,M2/M50 Intersection
+M1,44.9,Drogheda,M1/M50 Intersection
+N51,13.4,Slane,Navan
+N51,3.6,Navan,N51/M3 Intersection
+M3,15.4,Kells,N51/M3 Intersection
+N51,27,Delvin,N51/M3 Intersection
+M3,42.3,M3/M50 Intersection,N51/M3 Intersection
+R135,7.2,M2/M50 Intersection,Dublin
+R147,8,M3/M50 Intersection,Dublin
+R148,8.9,M4/M50 Intersection,Dublin
+R137,7.8,N81/M50 Intersection,Dublin
+R110,8.3,N7/M50 Intersection,Dublin
+M50,9.7,M2/M50 Intersection,M1/M50 Intersection
+M50,10.6,M2/M50 Intersection,M3/M50 Intersection
+M50,7.1,M3/M50 Intersection,M4/M50 Intersection
+M50,7.9,M4/M50 Intersection,N7/M50 Intersection
+M50,9.8,N7/M50 Intersection,N81/M50 Intersection
+M50,21.8,Bray,N81/M50 Intersection
+N62,45.4,Athlone,Birr
+N65,53,Borrisokane,M6/N65 Intersection
+N67,23.5,N6/M6/N67 Intersection,Kinvarra
+M18,56,M6/M17/M18 Intersection,M18/N18/N85 Intersection
+N52,20.9,Birr,Borrisokane
+N52,7.1,N52/M6 Intersection,N52/R421 Intersection
+R421,3.1,Tullamore,N52/R421 Intersection
+N52,6.6,N52/N80/R443 Intersection,N52/R421 Intersection
+R443,2.9,N52/N80/R443 Intersection,Tullamore
+N52,35.9,N52/N80/R443 Intersection,Birr
+N80,30.7,N52/N80/R443 Intersection,Portlaoise
+M11,67.5,Bray,Gorey
+N7,45.1,M7/N7/M9 Intersection,N7/M50 Intersection
+N81,99.3,N81/N80 Split,N81/M50 Intersection
+N67,34,Kinvarra,Lisdoonvarna
+R478/R479,7.2,Doolin,Lisdoonvarna
+N62,19.5,Birr,Roscrea
+N85,4.4,M18/N18/N85 Intersection,Ennis
+N68,40.3,Ennis,Kilrush
+N67,13.1,Kilrush,Kilkee
+N67,45.6,N67/N85 Intersection,Lisdoonvarna
+N67,12.1,N67/N85 Intersection,Kilkee
+N85,27.8,N67/N85 Intersection,Ennis
+N18,30.6,M18/N18/N85 Intersection,Limerick
+N69,33.3,Limerick,Foynes
+N69,20.2,Foynes,Tarbert
+N69,44,Tarbert,Tralee
+N24,94,Limerick,Tipperary
+M7,40.7,Limerick,M7/N52 Split
+M20,14.1,Limerick,M20/N21/N20 Intersection
+N21,8,Adare,M20/N21/N20 Intersection
+N20,52.6,Mallow,M20/N21/N20 Intersection
+N74,19.4,Tipperary,Cashel
+M8,17.2,Cashel,Cahir
+N24,21.8,Cahir,Tipperary
+N24,18.4,Cahir,Clonmel
+N76,53.1,Clonmel,Kilkenny
+N72,30.2,Fermoy,Mallow
+N20,35.6,Mallow,Cork
+N72,64.5,Mallow,Killarney
+N22,85.4,Cork,Killarney
+N71,51.9,Cork,Clonakilty
+N71,57.5,Bantry,Clonakilty
+N71,44.6,Bantry,Kenmare
+N70,26.3,Kenmare,Sneem
+N70,51,Sneem,Cahersiveen
+N70,40.1,Cahersiveen,Killorglin
+N70,25.9,Killorglin,Tralee
+N86,47.7,Tralee,Dingle
+M8,36.4,Cork,Fermoy
+N25,24.3,Cork,Midleton
+N25,53.5,Midleton,Dungarvan
+N25,45.7,Dungarvan,Waterford
+N72,51.4,Dungarvan,Fermoy
+N24,47,Clonmel,Waterford
+N25,23.2,Waterford,New Ross
+N25,36.7,New Ross,Wexford
+N30,31,New Ross,Enniscorthy
+N11,22.9,Wexford,Enniscorthy
+N21,66.6,Adare,N21/N23 Intersection
+N21,15.5,Tralee,N21/N23 Intersection
+N22,18.3,Tralee,Farranfore
+N23,9.8,N21/N23 Intersection,Farranfore
+N22,15.5,Farranfore,Killarney
+N72,21.8,Killorglin,Killarney
+N71,32.5,Killarney,Kenmare
+N52,20.3,Borrisokane,M7/N52 Split
+M7,32.8,M7/N62 Intersection,M7/N52 Split
+N62,4.5,M7/N62 Intersection,Roscrea
+N62,29.4,M7/N62 Intersection,Thurles
+M7,23,M7/N62 Intersection,M7/M8 Split
+N73,38.4,M8/N73 Split,Mallow
+M8,19.3,M8/N73 Split,Fermoy
+M8,23.2,M8/N73 Split,Cahir
+M7,19,M7/M8 Split,N77/M7 Intersection
+N77,2.4,N77/M7 Intersection,Portlaoise
+N80,3.4,N80/M7 Intersection,Portlaoise
+N77,40.5,N77/N78 Split,N77/M7 Intersection
+N78,31.5,N78/N80 Intersection,N77/N78 Split
+N80,18.7,N78/N80 Intersection,N80/M7 Intersection
+N80,14.6,N78/N80 Intersection,Carlow
+N77,6.7,N77/N78 Split,Kilkenny
+N10,8.4,Kilkenny,N10/M9 Intersection (N. part)
+N10,9.4,Kilkenny,N10/M9 Intersection (S. part)
+M9,9,N10/M9 Intersection (N. part),N10/M9 Intersection (S. part)
+M9,28.8,N10/M9 Intersection (N. part),Carlow
+M9,40.9,N10/M9 Intersection (S. part),Waterford
+M7,43,N80/M7 Intersection,M7/N7/M9 Intersection
+M9,21.5,N78/M9 Intersection,M7/N7/M9 Intersection
+N78,18.9,N78/M9 Intersection,N78/N80 Intersection
+M9,23.2,N78/M9 Intersection,Carlow
+N80,20.4,Carlow,N81/N80 Split
+N11,23.7,N11/N80 Split,Gorey
+N80,29.7,N11/N80 Split,N81/N80 Split
+N11,5.1,N11/N80 Split,Enniscorthy
+M8,15.3,N62/M8 Intersection,Cashel
+N62,7.6,N62/M8 Intersection,Thurles
+N75,7,N75/M8 Intersection,Thurles
+M8,6.5,N75/M8 Intersection,N62/M8 Intersection
+M8,34.5,M7/M8 Split,N75/M8 Intersection
+R675,12.5,Waterford,Tramore

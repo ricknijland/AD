@@ -1,4 +1,4 @@
-public class GraphLink<T> {
+public class GraphLink {
 	public GraphNode<?> destNode;
 	public double time;
 	public double length;
@@ -9,9 +9,9 @@ public class GraphLink<T> {
 		this.destNode = destNode;
 		this.length = length;
 		this.name = name;
-		char speed = name.charAt(0);
+		char speedType = name.charAt(0);
 		
-		switch(speed) {
+		switch(speedType) {
 		case 'M':
 			this.speed = 120;
 			this.time = (length / speed) * 60;
@@ -28,8 +28,9 @@ public class GraphLink<T> {
 		case 'I':
 			this.speed = 35;
 			this.time = (length / speed) * 60;
+			break;
 		default:
-			this.speed = 25;
+			this.speed = 10;
 			this.time = (length / speed) * 60;
 
 		}
