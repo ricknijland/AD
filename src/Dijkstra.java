@@ -4,11 +4,12 @@ import java.util.List;
 
 public class Dijkstra {
 	
-	public <T> CostedPath findQuickestPath(GraphNode<?> startNode, T lookingFor) {
+	public <T> CostedPath findQuickestPath(GraphNode<?> startNode, T lookingFor, List<GraphNode<?>> avoidNodes) {
 		CostedPath cp = new CostedPath();
 		List<GraphNode<?>> encountered=new ArrayList<>(), unencountered=new ArrayList<>();
 		startNode.nodeValue=0;
 		unencountered.add(startNode);
+		if(avoidNodes != null) encountered.addAll(avoidNodes);
 		GraphNode<?> currentNode;
 		
 		do {
@@ -51,11 +52,12 @@ public class Dijkstra {
 		return null;
 	}
 	
-	public <T> CostedPath findShortestPath(GraphNode<?> startNode, T lookingFor) {
+	public <T> CostedPath findShortestPath(GraphNode<?> startNode, T lookingFor, List<GraphNode<?>> avoidNodes) {
 		CostedPath cp = new CostedPath();
 		List<GraphNode<?>> encountered=new ArrayList<>(), unencountered=new ArrayList<>();
 		startNode.nodeValue=0;
 		unencountered.add(startNode);
+		if(avoidNodes != null) encountered.addAll(avoidNodes);
 		GraphNode<?> currentNode;
 		
 		do {
