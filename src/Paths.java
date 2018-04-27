@@ -1,8 +1,6 @@
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.SynchronousQueue;
 
 public class Paths {
 
@@ -60,18 +58,18 @@ public class Paths {
 			quickest = dijkstra.findQuickestPath(nodes.get(startNode), destNode, avoidNodes, avoidLinks);
 		}
 		
-//		// Print out nodes and links
-//		for(int j = 0; j < quickest.pathList.size(); j++){ // Cycles thru each node
-//			System.out.println(quickest.pathList.get(j).data); // Print out each node
-//			for(int i = 0; i < quickest.pathList.get(j).adjList.size(); i++) { // Shuffle through different links in each nodes' adjList
-//				try{
-//					if(quickest.pathList.get(j).adjList.get(i).destNode.equals(quickest.pathList.get(j+1))) // If this link brings us to next destNode
-//						System.out.println("Take " + quickest.pathList.get(j).adjList.get(i).name + " for " + 
-//							quickest.pathList.get(j).adjList.get(i).length + "km to " + quickest.pathList.get(j+1).data + "."); // Print out the chosen node (if only one route, then the 0 index will be that route)
-//					}catch(IndexOutOfBoundsException ex){}
-//			}
-//		}
-//		System.out.printf("Total time: %.2f minutes.\n\n", quickest.pathCost);
+		// Print out nodes and links
+		for(int j = 0; j < quickest.pathList.size(); j++){ // Cycles thru each node
+			System.out.println(quickest.pathList.get(j).data); // Print out each node
+			for(int i = 0; i < quickest.pathList.get(j).adjList.size(); i++) { // Shuffle through different links in each nodes' adjList
+				try{
+					if(quickest.pathList.get(j).adjList.get(i).destNode.equals(quickest.pathList.get(j+1))) // If this link brings us to next destNode
+						System.out.println("Take " + quickest.pathList.get(j).adjList.get(i).name + " for " + 
+							quickest.pathList.get(j).adjList.get(i).length + "km to " + quickest.pathList.get(j+1).data + "."); // Print out the chosen node (if only one route, then the 0 index will be that route)
+					}catch(IndexOutOfBoundsException ex){}
+			}
+		}
+		System.out.printf("Total time: %.2f minutes.\n\n", quickest.pathCost);
 		
 		return quickest;
 	}
@@ -101,17 +99,17 @@ public class Paths {
 			shortest = dijkstra.findShortestPath(nodes.get(startNode), destNode, avoidNodes, avoidLinks);
 		}
 		// Print out nodes and links
-//		for(int j = 0; j < shortest.pathList.size(); j++){ // Cycles thru each node
-//			System.out.println(shortest.pathList.get(j).data); // Print out each node
-//			for(int i = 0; i < shortest.pathList.get(j).adjList.size(); i++) { // Shuffle through different links in each nodes' adjList
-//				try{
-//					if(shortest.pathList.get(j).adjList.get(i).destNode.equals(shortest.pathList.get(j+1))) // If this link brings us to next destNode
-//						System.out.println("Take " + shortest.pathList.get(j).adjList.get(i).name + " for " + 
-//								shortest.pathList.get(j).adjList.get(i).length + "km to " + shortest.pathList.get(j+1).data + "."); // Print out the chosen node (if only one route, then the 0 index will be that route)
-//				}catch(IndexOutOfBoundsException ex){}
-//			}
-//		}
-//		System.out.printf("Total distance: %.2f km.\n\n", shortest.pathCost);
+		for(int j = 0; j < shortest.pathList.size(); j++){ // Cycles thru each node
+			System.out.println(shortest.pathList.get(j).data); // Print out each node
+			for(int i = 0; i < shortest.pathList.get(j).adjList.size(); i++) { // Shuffle through different links in each nodes' adjList
+				try{
+					if(shortest.pathList.get(j).adjList.get(i).destNode.equals(shortest.pathList.get(j+1))) // If this link brings us to next destNode
+						System.out.println("Take " + shortest.pathList.get(j).adjList.get(i).name + " for " + 
+								shortest.pathList.get(j).adjList.get(i).length + "km to " + shortest.pathList.get(j+1).data + "."); // Print out the chosen node (if only one route, then the 0 index will be that route)
+				}catch(IndexOutOfBoundsException ex){}
+			}
+		}
+		System.out.printf("Total distance: %.2f km.\n\n", shortest.pathCost);
 		
 		return shortest;
 	}
