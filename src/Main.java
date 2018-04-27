@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.sun.javafx.geom.transform.GeneralTransform3D;
+
 import GraphVisual.CellT;
 import GraphVisual.Graph;
 import GraphVisual.Layout;
@@ -29,15 +31,17 @@ public class Main extends Application {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		cities = new CityList();
+		/*
 		for(int i = 0; i < cities.size(); i++) {
 			System.out.print(i + ". " +cities.get(i).data);
 			for(int j = 0; j < cities.get(i).adjList.size(); j++) {
 				System.out.println(" Time: " + cities.get(i).adjList.get(j).time + " Dest: " + cities.get(i).adjList.get(j).destNode.data);
 			}
 		} System.out.println();
+		*/
 		d = new Dijkstra();
 		
-		CostedPath shortest = d.findShortestPath(cities.get(1), "Galway");
+		CostedPath shortest = d.findShortestPath(cities.getNodeWithString("Dublin"), "Galway");
 		for(GraphNode<?> z : shortest.pathList) {
 			System.out.println(z.data);
 		}
@@ -48,13 +52,12 @@ public class Main extends Application {
 			System.out.println(z.data);
 		}
 		System.out.printf("Total time: %.2f minutes.", quickest.pathCost);
-
+		
 		launch(args);
 	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		GridPane grid = new GridPane();
 		BorderPane root = new BorderPane();
 		
 
@@ -118,7 +121,7 @@ public class Main extends Application {
 		graph.endUpdate();
 	}
 	
-	private GraphNode getNodeWithString(String name) {
+	public GraphNode getNodeWithString(String name) {
 		for(int i = 0; i < cities.size(); i++) {
 			if(name.equals(cities.get(i).data));
 				return cities.get(i); 

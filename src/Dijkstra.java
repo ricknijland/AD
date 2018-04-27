@@ -10,7 +10,7 @@ public class Dijkstra {
 		startNode.nodeValue=0; //startvalue = 0
 		unencountered.add(startNode); //add start node as only value in encountered list to start
 		GraphNode<?> currentNode; 
-		
+	
 		do { //loop until unencounterd EMPTY
 			currentNode=unencountered.remove(0); //get first unencountered node (sorted list)
 			encountered.add(currentNode); //record current node in encountered list
@@ -73,7 +73,7 @@ public class Dijkstra {
 					boolean foundPrevPathNode=false;
 					for(GraphNode<?> n : encountered) {
 						for(GraphLink e : n.adjList) {
-							if(e.destNode==currentNode && currentNode.nodeValue-e.length==n.nodeValue) {
+							if(e.destNode==currentNode && currentNode.nodeValue-(int)e.length==n.nodeValue) {
 								cp.pathList.add(0,n);
 								currentNode=n;
 								foundPrevPathNode=true;
@@ -92,7 +92,7 @@ public class Dijkstra {
 			
 			for(GraphLink e : currentNode.adjList)
 				if(!encountered.contains(e.destNode)) {
-					e.destNode.nodeValue=Double.min(e.destNode.nodeValue, currentNode.nodeValue+e.length);
+					e.destNode.nodeValue=Integer.min((int)(e.destNode.nodeValue), (int)(currentNode.nodeValue+e.length));
 					unencountered.add(e.destNode);
 				}
 			Collections.sort(unencountered,(n1,n2)->(int)(n1.nodeValue-n2.nodeValue));//FIXME

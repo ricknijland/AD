@@ -10,7 +10,7 @@ public class CircleCell extends Cell {
 	public CircleCell(String cellId) {
 		super(cellId);
 		
-		Circle view = new Circle(25,25,25);
+		Circle view = new Circle(10,10,10);
 		
 		view.setStroke(Color.DODGERBLUE);
 		view.setFill(Color.DODGERBLUE);

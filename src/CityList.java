@@ -6,68 +6,73 @@ import java.util.Scanner;
 
 public class CityList {
 
+	// Variables
 	private String[] CSVdata;
-	private List<GraphNode<?>> cities = new ArrayList<>();
-	private boolean first, second;
-	private Scanner sc;
+	private List<GraphNode<String>> nodes = new ArrayList<>();
 
-	@SuppressWarnings("unchecked")
+	// Constructor that adds all nodes to nodes(readNodes()) and connect them via links
 	public CityList() throws FileNotFoundException {
-		try {
-			sc = new Scanner(new File("C:\\Users\\Rick\\eclipse-workspace\\CA2\\MapOfIreland.csv"));
-		} catch(FileNotFoundException e) {
-			System.out.println("File not found!");
-		}
+		Scanner sc = new Scanner(new File("Resources\\MapOfIreland.csv"));
+		readNodes(); // Call method to read in all nodes
 		sc.nextLine(); //Skip first line of headers
 		while(sc.hasNext()) {
 			CSVdata = sc.nextLine().split(",");
-			GraphNode link1 = new GraphNode(CSVdata[3]);
-			GraphNode link2 = new GraphNode(CSVdata[4]);
-			first = false; second = false;
-			for(int i = 0; i < 2; i++)
-				for(int j = 0; j < cities.size(); j++) {
-					if(cities.get(j).data.equals(link1.data)) first = true;
-					if(cities.get(j).data.equals(link2.data)) second = true;
-				}
-			if(first && second) {
-				int temp1 = 0, temp2 = 0;
-				for(int i = 0; i < 2; i++)
-				for(int j = 0; j < cities.size(); j++) {
-					if(cities.get(j).data.equals(link1.data)) link1 = cities.get(j);
-					if(cities.get(j).data.equals(link2.data)) link2 = cities.get(j);
-				}
-				link1.connectToNodeUndirected(link2, Double.parseDouble(CSVdata[1]), CSVdata[0]);
+			int link1 = -1, link2 = -1; // Holds index of two nodes to be connected
+			for(int i = 0; i < nodes.size(); i++) {
+				if(nodes.get(i).data.equals(CSVdata[2])) // If node data == first node to be connected
+					link1 = i;
+				if(nodes.get(i).data.equals(CSVdata[3])) // If node data == second node to be connected
+					link2 = i;
 			}
-			else if(first) {
-				for(int i = 0; i < cities.size(); i++) {
-					if(cities.get(i).data.equals(link1.data)) {
-						cities.get(i).connectToNodeUndirected(link2, Double.parseDouble(CSVdata[1]), CSVdata[0]);
-						cities.add(link2);
-					}
-				}
+			// If one or both nodes weren't found
+			if(link1 < 0 || link2 < 0) {
+				System.out.println("ERROR: ONE OR BOTH NODES DO NOT EXIST");
+				System.out.println(CSVdata[2] + "|" + CSVdata[3]);
+				break;
 			}
-			else if(second) {
-				for(int i = 0; i < cities.size(); i++) {
-					if(cities.get(i).data.equals(link2.data)) {
-						cities.get(i).connectToNodeUndirected(link1, Double.parseDouble(CSVdata[1]), CSVdata[0]);
-						cities.add(link1);
-					}
-				}
-			}
-			else {
-				link1.connectToNodeUndirected(link2, Double.parseDouble(CSVdata[1]), CSVdata[0]);
-				cities.add(link1); 
-				cities.add(link2);
-			}
+			// Connect two links
+			else
+				nodes.get(link1).connectToNodeUndirected(nodes.get(link2), Double.parseDouble(CSVdata[1]), CSVdata[0]);
 		}
 		sc.close();
 	}
 	
-	public GraphNode<?> get(int index) {
-		return cities.get(index);
+	
+	// Create Nodes and Links for Map
+	private void readNodes() throws FileNotFoundException{
+		Scanner sc = new Scanner(new File("Resources\\ListOfNodes.csv"));
+		sc.nextLine(); //Skip first line of headers
+		while(sc.hasNext()) { 
+			CSVdata = sc.nextLine().split(","); // Add contents of each row to String[]
+			nodes.add(new GraphNode<String>(CSVdata[0], CSVdata[1])); // Add new node to object list
+		}
+		sc.close();
 	}
 	
+	// Getter for nodes
+	public GraphNode<?> get(int index) {
+		return nodes.get(index);
+	}
+	
+	// Getter for nodes by String name
+	public GraphNode<?> get(String name) {
+		for(GraphNode<?> node : nodes) {
+			if(node.data.equals(name))
+				return node;
+		}
+		return null;
+	}
+	
+	public GraphNode<?> getNodeWithString(String name) {
+		for(int i = 0; i < nodes.size(); i++) {
+			if(name.equals(nodes.get(i).data));
+				return nodes.get(i); 
+		}
+		return null;
+	}
+	
+	// Getter for size of node list
 	public int size() {
-		return cities.size();
+		return nodes.size();
 	}
 }
