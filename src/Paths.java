@@ -118,19 +118,4 @@ public class Paths {
 		System.out.printf("Total distance: %.2f km.\n\n", shortest.pathCost);
 	}
 	
-	// Method to find multiple quick routes
-	public void findMultiplePaths(String startNode, String destNode, int numOfPaths) {
-		List<CostedPath> multi = dijkstra.findMultiplePaths(nodes.get(startNode), nodes.get(destNode).data, avoidNodes, avoidLinks, numOfPaths);
-		try {
-			if(multi.get(0).pathList.equals(null))
-				return;
-		}catch(NullPointerException ex) {
-			System.out.println("Sorry, could not find a proper route.");
-			return;
-		}
-		System.out.println(multi.get(0).pathCost);
-		System.out.println(multi.get(1).pathCost);
-		System.out.println(multi.get(2).pathCost);
-	}
-	
 }

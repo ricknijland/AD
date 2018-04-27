@@ -67,13 +67,4 @@ public class CityList {
 	public int size() {
 		return nodes.size();
 	}
-	
-	// For checking if nodes are in list
-	public boolean contains(List<String> nodeList) { //FIXME
-		for(String node : nodeList) {
-			if(!nodes.contains(node))
-				return false;
-		}
-		return true;
-	}
 }
