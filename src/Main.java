@@ -1,4 +1,7 @@
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+
 import GraphVisual.CellT;
 import GraphVisual.Graph;
 import GraphVisual.Layout;
@@ -18,17 +21,15 @@ import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-	
-<<<<<<< HEAD
-	private static String node1 = "Dublin", node2 = "Galway"; // Makes testing easier
-=======
+
+	// Variables
 	Graph graph = new Graph();
-	static CityList cities;
-	static Dijkstra d;
->>>>>>> c56489f799148e701d0cf1ea39315850a77adc4d
+	static Paths paths;
+	static List<String> avoidNodes, avoidLinks, waypoints;
+	static String node1 = "Mallow", node2 = "Waterford";
+	static CostedPath path;
 
 	public static void main(String[] args) throws FileNotFoundException {
-		cities = new CityList();
 		/*
 		for(int i = 0; i < cities.size(); i++) {
 			System.out.print(i + ". " +cities.get(i).data);
@@ -37,26 +38,22 @@ public class Main extends Application {
 			}
 		} System.out.println();
 		*/
-		d = new Dijkstra();
+		avoidNodes = new ArrayList<>();
+		avoidLinks = new ArrayList<>();
+		waypoints = new ArrayList<>();
+		paths = new Paths(avoidNodes, avoidLinks, waypoints);
 		
-<<<<<<< HEAD
-		waypoints.add("Waterford");
-		waypoints.add("Cork");
-		
-		Paths path = new Paths(avoidNodes, avoidLinks, waypoints);
-=======
-		CostedPath shortest = d.findShortestPath(cities.getNodeWithString("Dublin"), "Galway", null, null);
-		for(GraphNode<?> z : shortest.pathList) {
+		path = paths.findShortestPath(node1, node2);
+		for(GraphNode<?> z : path.pathList) {
 			System.out.println(z.data);
 		}
-		System.out.printf("Total distance: %.2f km.\n\n", shortest.pathCost);
->>>>>>> c56489f799148e701d0cf1ea39315850a77adc4d
+		System.out.printf("Total distance: %.2f km.\n\n", path.pathCost);
 		
-		CostedPath quickest = d.findQuickestPath(cities.get(1), "Dublin", null, null);
-		for(GraphNode<?> z : quickest.pathList) {
+		path = paths.findQuickestPath(node1, node2);
+		for(GraphNode<?> z : path.pathList) {
 			System.out.println(z.data);
 		}
-		System.out.printf("Total time: %.2f minutes.", quickest.pathCost);
+		System.out.printf("Total time: %.2f minutes.", path.pathCost);
 		
 		launch(args);
 	}
@@ -83,9 +80,8 @@ public class Main extends Application {
 		    public void handle(ActionEvent e) {
 		        if ((source.getText() != null && !source.getText().isEmpty())) {
 		        	if((destination.getText() != null && !destination.getText().isEmpty())) {
-		        		d.findShortestPath(getNodeWithString(source.getText()), destination.getText(), null, null);
+		        		path = paths.findShortestPath(sourceTextField.getText(), destTextField.getText());
 		        	}
-		        		
 		        } 
 		     }
 		 });
@@ -110,23 +106,23 @@ public class Main extends Application {
 		
 		graph.beginUpdate();
 		
-		for(int i = 0; i < cities.size(); i++) {
-			model.addCell(cities.get(i).data.toString(), CellT.CIRCLE);
+		for(int i = 0; i < paths.nodes.size(); i++) {
+			model.addCell(paths.nodes.get(i).data.toString(), CellT.CIRCLE);
 			
 		}
 		
-		for(int i = 0; i < cities.size(); i++) {
-			for(int j = 0; j < cities.get(i).adjList.size(); j++) {
-				model.addEdge(cities.get(i).data.toString(), cities.get(i).adjList.get(j).destNode.data.toString());
+		for(int i = 0; i < paths.nodes.size(); i++) {
+			for(int j = 0; j < paths.nodes.get(i).adjList.size(); j++) {
+				model.addEdge(paths.nodes.get(i).data.toString(), paths.nodes.get(i).adjList.get(j).destNode.data.toString());
 			}
 		}
 		graph.endUpdate();
 	}
 	
 	public GraphNode getNodeWithString(String name) {
-		for(int i = 0; i < cities.size(); i++) {
-			if(name.equals(cities.get(i).data));
-				return cities.get(i); 
+		for(int i = 0; i < paths.nodes.size(); i++) {
+			if(name.equals(paths.nodes.get(i).data));
+				return paths.nodes.get(i); 
 		}
 		return null;
 	}

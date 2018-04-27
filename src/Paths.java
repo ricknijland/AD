@@ -9,18 +9,14 @@ public class Paths {
 	// Variables
 	private List<GraphNode<?>> avoidNodes;
 	private List<String> avoidLinks, waypoints;
-	private CityList nodes;
+	protected CityList nodes;
 	private Dijkstra dijkstra = new Dijkstra();
-	private int node1, node2;
 	
 	// Default Constructor
 	public Paths() { 
 		try {
 			nodes = new CityList();
 		}catch(FileNotFoundException ex){}
-		
-		this.node1 = -1; 
-		this.node2 = -1;
 	}
 	
 	// Constructor that takes a list of cities to avoid and instantiates CityList
@@ -29,8 +25,6 @@ public class Paths {
 			nodes = new CityList();
 		}catch(FileNotFoundException ex){}
 		
-		this.node1 = -1; 
-		this.node2 = -1;
 		this.avoidNodes = new ArrayList<>();
 		for(String node : avoidNodes) {
 			this.avoidNodes.add(nodes.get(node)); // Add all nodes to be avoided into list
@@ -42,7 +36,7 @@ public class Paths {
 	}
 	
 	// Method to find quickest route
-	public void findQuickestPath(String startNode, String destNode) {
+	public CostedPath findQuickestPath(String startNode, String destNode) {
 		CostedPath quickest = new CostedPath();
 		
 		if(!waypoints.isEmpty()) { // If there are waypoints that need to be hit on route
@@ -63,25 +57,27 @@ public class Paths {
 			
 		}
 		else { // If only 2 nodes to find route for
-			quickest = dijkstra.findQuickestPath(nodes.get(startNode), nodes.get(destNode).data, avoidNodes, avoidLinks);
+			quickest = dijkstra.findQuickestPath(nodes.get(startNode), destNode, avoidNodes, avoidLinks);
 		}
 		
-		// Print out nodes and links
-		for(int j = 0; j < quickest.pathList.size(); j++){ // Cycles thru each node
-			System.out.println(quickest.pathList.get(j).data); // Print out each node
-			for(int i = 0; i < quickest.pathList.get(j).adjList.size(); i++) { // Shuffle through different links in each nodes' adjList
-				try{
-					if(quickest.pathList.get(j).adjList.get(i).destNode.equals(quickest.pathList.get(j+1))) // If this link brings us to next destNode
-						System.out.println("Take " + quickest.pathList.get(j).adjList.get(i).name + " for " + 
-							quickest.pathList.get(j).adjList.get(i).length + "km to " + quickest.pathList.get(j+1).data + "."); // Print out the chosen node (if only one route, then the 0 index will be that route)
-					}catch(IndexOutOfBoundsException ex){}
-			}
-		}
-		System.out.printf("Total time: %.2f minutes.\n\n", quickest.pathCost);
+//		// Print out nodes and links
+//		for(int j = 0; j < quickest.pathList.size(); j++){ // Cycles thru each node
+//			System.out.println(quickest.pathList.get(j).data); // Print out each node
+//			for(int i = 0; i < quickest.pathList.get(j).adjList.size(); i++) { // Shuffle through different links in each nodes' adjList
+//				try{
+//					if(quickest.pathList.get(j).adjList.get(i).destNode.equals(quickest.pathList.get(j+1))) // If this link brings us to next destNode
+//						System.out.println("Take " + quickest.pathList.get(j).adjList.get(i).name + " for " + 
+//							quickest.pathList.get(j).adjList.get(i).length + "km to " + quickest.pathList.get(j+1).data + "."); // Print out the chosen node (if only one route, then the 0 index will be that route)
+//					}catch(IndexOutOfBoundsException ex){}
+//			}
+//		}
+//		System.out.printf("Total time: %.2f minutes.\n\n", quickest.pathCost);
+		
+		return quickest;
 	}
 	
 	// Method to find shortest route
-	public void findShortestPath(String startNode, String destNode) {
+	public CostedPath findShortestPath(String startNode, String destNode) {
 		CostedPath shortest = new CostedPath();
 		
 		if(!waypoints.isEmpty()) { // If there are waypoints that need to be hit on route
@@ -102,20 +98,22 @@ public class Paths {
 			
 		}
 		else { // If only 2 nodes to find route for
-			shortest = dijkstra.findQuickestPath(nodes.get(startNode), nodes.get(destNode).data, avoidNodes, avoidLinks);
+			shortest = dijkstra.findShortestPath(nodes.get(startNode), destNode, avoidNodes, avoidLinks);
 		}
 		// Print out nodes and links
-		for(int j = 0; j < shortest.pathList.size(); j++){ // Cycles thru each node
-			System.out.println(shortest.pathList.get(j).data); // Print out each node
-			for(int i = 0; i < shortest.pathList.get(j).adjList.size(); i++) { // Shuffle through different links in each nodes' adjList
-				try{
-					if(shortest.pathList.get(j).adjList.get(i).destNode.equals(shortest.pathList.get(j+1))) // If this link brings us to next destNode
-						System.out.println("Take " + shortest.pathList.get(j).adjList.get(i).name + " for " + 
-								shortest.pathList.get(j).adjList.get(i).length + "km to " + shortest.pathList.get(j+1).data + "."); // Print out the chosen node (if only one route, then the 0 index will be that route)
-				}catch(IndexOutOfBoundsException ex){}
-			}
-		}
-		System.out.printf("Total distance: %.2f km.\n\n", shortest.pathCost);
+//		for(int j = 0; j < shortest.pathList.size(); j++){ // Cycles thru each node
+//			System.out.println(shortest.pathList.get(j).data); // Print out each node
+//			for(int i = 0; i < shortest.pathList.get(j).adjList.size(); i++) { // Shuffle through different links in each nodes' adjList
+//				try{
+//					if(shortest.pathList.get(j).adjList.get(i).destNode.equals(shortest.pathList.get(j+1))) // If this link brings us to next destNode
+//						System.out.println("Take " + shortest.pathList.get(j).adjList.get(i).name + " for " + 
+//								shortest.pathList.get(j).adjList.get(i).length + "km to " + shortest.pathList.get(j+1).data + "."); // Print out the chosen node (if only one route, then the 0 index will be that route)
+//				}catch(IndexOutOfBoundsException ex){}
+//			}
+//		}
+//		System.out.printf("Total distance: %.2f km.\n\n", shortest.pathCost);
+		
+		return shortest;
 	}
 	
 }
