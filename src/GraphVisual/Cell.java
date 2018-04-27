@@ -18,6 +18,10 @@ public class Cell extends Pane {
 		this.cellId = cellId;
 	}
 	
+	public void setColor() {
+		
+	}
+	
 	public void addCellChild(Cell cell) {
 		children.add(cell);
 	}

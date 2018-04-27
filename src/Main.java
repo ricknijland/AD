@@ -1,7 +1,6 @@
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-
 import GraphVisual.CellT;
 import GraphVisual.Graph;
 import GraphVisual.Layout;
@@ -15,9 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -28,16 +25,9 @@ public class Main extends Application {
 	static List<String> avoidNodes, avoidLinks, waypoints;
 	static String node1 = "Mallow", node2 = "Waterford";
 	static CostedPath path;
+	static Model model;
 
 	public static void main(String[] args) throws FileNotFoundException {
-		/*
-		for(int i = 0; i < cities.size(); i++) {
-			System.out.print(i + ". " +cities.get(i).data);
-			for(int j = 0; j < cities.get(i).adjList.size(); j++) {
-				System.out.println(" Time: " + cities.get(i).adjList.get(j).time + " Dest: " + cities.get(i).adjList.get(j).destNode.data);
-			}
-		} System.out.println();
-		*/
 		avoidNodes = new ArrayList<>();
 		avoidLinks = new ArrayList<>();
 		waypoints = new ArrayList<>();
@@ -81,6 +71,7 @@ public class Main extends Application {
 		        if ((source.getText() != null && !source.getText().isEmpty())) {
 		        	if((destination.getText() != null && !destination.getText().isEmpty())) {
 		        		path = paths.findShortestPath(sourceTextField.getText(), destTextField.getText());
+		        		showPath();
 		        	}
 		        } 
 		     }
@@ -102,7 +93,7 @@ public class Main extends Application {
 	}
 	
 	private void addGraphComponents() {
-		Model model = graph.getModel();
+		model = graph.getModel();
 		
 		graph.beginUpdate();
 		
@@ -119,11 +110,21 @@ public class Main extends Application {
 		graph.endUpdate();
 	}
 	
-	public GraphNode getNodeWithString(String name) {
-		for(int i = 0; i < paths.nodes.size(); i++) {
-			if(name.equals(paths.nodes.get(i).data));
-				return paths.nodes.get(i); 
+	private void showPath() {
+		for(int i = 0; i < path.pathList.size(); i++) {
+			for(int j = 0; j < model.getAllCells().size(); j++) {
+				if(path.pathList.get(i).data.equals(model.getAllCells().get(j).getCellId())) { // Shuffle through different links in each nodes' adjList
+					for(int y = 0; y < path.pathList.get(i).adjList.size(); y++)
+						for(int x = 0; x < model.getAllEdges().size(); x++) {
+							if(i < path.pathList.size() - 1) {
+									if(model.getAllEdges().get(x).getTarget().getCellId().equals(path.pathList.get(i+1).data))
+										if(model.getAllEdges().get(x).getSource().getCellId().equals(path.pathList.get(i).data))
+											model.getAllEdges().get(x).setColor();
+							}
+						}
+					model.getAllCells().get(j).setColor();
+					}
+				}
 		}
-		return null;
 	}
 }

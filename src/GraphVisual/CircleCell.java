@@ -1,21 +1,27 @@
 package GraphVisual;
 
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
 
 public class CircleCell extends Cell {
+	
+	private Circle view;
 
 	public CircleCell(String cellId) {
 		super(cellId);
 		
-		Circle view = new Circle(10,10,10);
+		view = new Circle(10,10,10);
 		
 		view.setStroke(Color.DODGERBLUE);
 		view.setFill(Color.DODGERBLUE);
 
 		setView(view);
+	}
+	
+	@Override
+	public void setColor() {
+		view.setStroke(Color.RED);
+		view.setFill(Color.RED);
 	}
 
 }

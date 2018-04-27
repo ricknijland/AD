@@ -36,4 +36,9 @@ public class Edge extends Group {
 	public Cell getTarget() {
 		return target;
 	}
+	
+	public void setColor() {
+		line.setStroke(Color.GREEN);
+		line.setStrokeWidth(4);
+	}
 }
