@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Main {
 	
-	private static String node1 = "Wexford", node2 = "Tramore"; // Makes testing easier
+	private static String node1 = "Wexford", node2 = "Doolin"; // Makes testing easier
 
 	public static void main(String[] args) throws FileNotFoundException {
 		List<String> avoidNodes = new ArrayList<>();

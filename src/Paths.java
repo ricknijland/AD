@@ -48,7 +48,7 @@ public class Paths {
 			return;
 		}
 		for(int j = 0; j < quickest.pathList.size(); j++){ // Cycles thru each node
-			System.out.println("Arrived at " + quickest.pathList.get(j).data); // Print out each node
+			System.out.println(quickest.pathList.get(j).data); // Print out each node
 			for(int i = 0; i < quickest.pathList.get(j).adjList.size(); i++) { // Shuffle through different links in each nodes' adjList
 				try{
 					if(quickest.pathList.get(j).adjList.get(i).destNode.equals(quickest.pathList.get(j+1))) // If this link brings us to next destNode
@@ -71,7 +71,7 @@ public class Paths {
 			return;
 		}
 		for(int j = 0; j < shortest.pathList.size(); j++){ // Cycles thru each node
-			System.out.println("Arrived at " + shortest.pathList.get(j).data); // Print out each node
+			System.out.println(shortest.pathList.get(j).data); // Print out each node
 			for(int i = 0; i < shortest.pathList.get(j).adjList.size(); i++) { // Shuffle through different links in each nodes' adjList
 				try{
 					if(shortest.pathList.get(j).adjList.get(i).destNode.equals(shortest.pathList.get(j+1))) // If this link brings us to next destNode
