@@ -4,16 +4,18 @@ import java.util.List;
 
 public class Dijkstra {
 	
-	public <T> CostedPath findQuickestPath(GraphNode<?> startNode, T lookingFor) {
-		CostedPath cp = new CostedPath(); //Create result object for quickest path
-		List<GraphNode<?>> encountered=new ArrayList<>(), unencountered=new ArrayList<>(); //(un)encountered lists
-		startNode.nodeValue=0; //startvalue = 0
-		unencountered.add(startNode); //add start node as only value in encountered list to start
-		GraphNode<?> currentNode; 
-	
-		do { //loop until unencounterd EMPTY
-			currentNode=unencountered.remove(0); //get first unencountered node (sorted list)
-			encountered.add(currentNode); //record current node in encountered list
+	public <T> CostedPath findQuickestPath(GraphNode<?> startNode, T lookingFor, List<GraphNode<?>> avoidNodes, List<String> avoidLinks) {
+		CostedPath cp = new CostedPath();
+		List<GraphNode<?>> encountered=new ArrayList<>(), unencountered=new ArrayList<>();
+		startNode.nodeValue=0;
+		unencountered.add(startNode);
+		if(avoidNodes != null) encountered.addAll(avoidNodes); // Avoids the nodes in this list
+		GraphNode<?> currentNode;
+		
+		do {
+			currentNode=unencountered.remove(0);
+			encountered.add(currentNode);
+
 			
 			if(currentNode.data.equals(lookingFor)) { //found goal - assemble path list back to start and return
 				cp.pathList.add(currentNode); //add current (goal) node to result
@@ -41,11 +43,10 @@ public class Dijkstra {
 				return cp; //the costed (quickest) path has been assembled, return
 			}
 			
-			//we're not at goalnode yet, so...
-			for(GraphLink e : currentNode.adjList) //for each edge from currentnode
-				if(!encountered.contains(e.destNode)) { //if node it leads not yet encountered
-					e.destNode.nodeValue=Integer.min((int)e.destNode.nodeValue, (int)(currentNode.nodeValue+e.time)); 
-					//^update nodeValue at the end of the edge to the minimum of its currentvalue or total of the currentnode's + cost of edge
+			for(GraphLink e : currentNode.adjList)
+				if(!encountered.contains(e.destNode)) {
+					if(avoidLinks.contains(e.name)) continue; // Avoids the link in the avoidLinks list
+					e.destNode.nodeValue=Integer.min((int)(e.destNode.nodeValue), (int)(currentNode.nodeValue+e.time));
 					unencountered.add(e.destNode);
 				}
 			Collections.sort(unencountered,(n1,n2)->(int)(n1.nodeValue-n2.nodeValue)); //sort ascending
@@ -54,11 +55,12 @@ public class Dijkstra {
 		return null; //no path
 	}
 	
-	public <T> CostedPath findShortestPath(GraphNode<?> startNode, T lookingFor) {
+	public <T> CostedPath findShortestPath(GraphNode<?> startNode, T lookingFor, List<GraphNode<?>> avoidNodes, List<String> avoidLinks) {
 		CostedPath cp = new CostedPath();
 		List<GraphNode<?>> encountered=new ArrayList<>(), unencountered=new ArrayList<>();
 		startNode.nodeValue=0;
 		unencountered.add(startNode);
+		if(avoidNodes != null) encountered.addAll(avoidNodes); // Avoid nodes in this list
 		GraphNode<?> currentNode;
 		
 		do {
@@ -92,6 +94,7 @@ public class Dijkstra {
 			
 			for(GraphLink e : currentNode.adjList)
 				if(!encountered.contains(e.destNode)) {
+					if(avoidLinks.contains(e.name)) continue; // Avoids the link in the avoidLinks list
 					e.destNode.nodeValue=Integer.min((int)(e.destNode.nodeValue), (int)(currentNode.nodeValue+e.length));
 					unencountered.add(e.destNode);
 				}
@@ -100,5 +103,4 @@ public class Dijkstra {
 		
 		return null;
 	}
-	
 }

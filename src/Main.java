@@ -1,10 +1,4 @@
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import com.sun.javafx.geom.transform.GeneralTransform3D;
-
 import GraphVisual.CellT;
 import GraphVisual.Graph;
 import GraphVisual.Layout;
@@ -41,13 +35,13 @@ public class Main extends Application {
 		*/
 		d = new Dijkstra();
 		
-		CostedPath shortest = d.findShortestPath(cities.getNodeWithString("Dublin"), "Galway");
+		CostedPath shortest = d.findShortestPath(cities.getNodeWithString("Dublin"), "Galway", null, null);
 		for(GraphNode<?> z : shortest.pathList) {
 			System.out.println(z.data);
 		}
 		System.out.printf("Total distance: %.2f km.\n\n", shortest.pathCost);
 		
-		CostedPath quickest = d.findQuickestPath(cities.get(1), "Dublin");
+		CostedPath quickest = d.findQuickestPath(cities.get(1), "Dublin", null, null);
 		for(GraphNode<?> z : quickest.pathList) {
 			System.out.println(z.data);
 		}
@@ -59,8 +53,6 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		BorderPane root = new BorderPane();
-		
-
 		
 		root.setCenter(graph.getScrollPane());
 		Scene scene = new Scene(root, 1024, 768);
@@ -80,8 +72,7 @@ public class Main extends Application {
 		    public void handle(ActionEvent e) {
 		        if ((source.getText() != null && !source.getText().isEmpty())) {
 		        	if((destination.getText() != null && !destination.getText().isEmpty())) {
-		        		d.findShortestPath(getNodeWithString(source.getText()), destination.getText());
-		        		System.out.println("vet kort");
+		        		d.findShortestPath(getNodeWithString(source.getText()), destination.getText(), null, null);
 		        	}
 		        		
 		        } 
