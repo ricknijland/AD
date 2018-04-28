@@ -8,7 +8,7 @@ public class Edge extends Group {
 	protected Cell source;
 	protected Cell target;
 	
-	Line line;
+	private Line line;
 	
 	public Edge(Cell source, Cell target) {
 		this.source = source;
@@ -37,8 +37,15 @@ public class Edge extends Group {
 		return target;
 	}
 	
-	public void setColor() {
-		line.setStroke(Color.GREEN);
-		line.setStrokeWidth(4);
+	// Set color and width of line in GUI
+	public void setColor(Color color) {
+		line.setStroke(color);
+		if(color.equals(Color.GREEN))
+			line.setStrokeWidth(4);
+	}
+	
+	// Return line to Main class
+	public Line getLine() {
+		return line;
 	}
 }

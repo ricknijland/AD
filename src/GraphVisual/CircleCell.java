@@ -19,9 +19,9 @@ public class CircleCell extends Cell {
 	}
 	
 	@Override
-	public void setColor() {
-		view.setStroke(Color.RED);
-		view.setFill(Color.RED);
+	public void setColor(Color color) {
+		view.setStroke(color);
+		view.setFill(color);
 	}
 
 }

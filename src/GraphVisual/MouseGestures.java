@@ -44,7 +44,7 @@ public class MouseGestures {
         public void handle(MouseEvent event) {
 
             Node node = (Node) event.getSource();
-
+   
             double offsetX = event.getScreenX() + dragContext.x;
             double offsetY = event.getScreenY() + dragContext.y;
 

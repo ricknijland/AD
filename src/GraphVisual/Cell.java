@@ -5,6 +5,7 @@ import java.util.List;
 
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 public class Cell extends Pane {
 	String cellId;
@@ -18,7 +19,7 @@ public class Cell extends Pane {
 		this.cellId = cellId;
 	}
 	
-	public void setColor() {
+	public void setColor(Color color) {
 		
 	}
 	
