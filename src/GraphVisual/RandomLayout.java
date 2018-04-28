@@ -21,8 +21,8 @@ public class RandomLayout extends Layout {
 
         for (Cell cell : cells) {
 
-            double x = rnd.nextDouble() * 1000;
-            double y = rnd.nextDouble() * 750;
+            double x = rnd.nextDouble() * 1050;
+            double y = rnd.nextDouble() * 400;
 
             cell.relocate(x, y);
 
