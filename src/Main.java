@@ -355,7 +355,7 @@ public class Main extends Application {
 											model.getAllEdges().get(x).setColor(Color.GREEN);
 							}
 						}
-					model.getAllCells().get(j).setColor(Color.RED);
+					model.getAllCells().get(j).setColor(Color.DARKGREEN);
 					}
 				}
 		}
