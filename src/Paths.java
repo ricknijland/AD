@@ -108,12 +108,11 @@ public class Paths {
 		
 		// Print out nodes and links
 		for(int j = 0; j < quickest.pathList.size(); j++) { // Cycles thru each node
-			labels.add(new Label(quickest.pathList.get(j).data + "")); // add node to route
 			for(int i = 0; i < quickest.pathList.get(j).adjList.size(); i++) { // Shuffle through different links in each nodes' adjList
 				try{
 					if(quickest.pathList.get(j).adjList.get(i).destNode.equals(quickest.pathList.get(j+1))) { // If this link brings us to next destNode
-						labels.add(new Label("Take " + quickest.pathList.get(j).adjList.get(i).name + " for " + 
-							quickest.pathList.get(j).adjList.get(i).length + "km to " + quickest.pathList.get(j+1).data + ".")); // Add link to route
+						labels.add(new Label("Take " + quickest.pathList.get(j).adjList.get(i).name + " from " + quickest.pathList.get(j).data + " to " + 
+								quickest.pathList.get(j+1).data + " for " + quickest.pathList.get(j).adjList.get(i).length + "km.")); // Add link to route
 					}
 				}catch(IndexOutOfBoundsException ex){}
 			}
@@ -131,12 +130,11 @@ public class Paths {
 		
 		// Print out nodes and links
 		for(int j = 0; j < shortest.pathList.size(); j++) { // Cycles thru each node
-			labels.add(new Label(shortest.pathList.get(j).data + "")); // Add to node
 			for(int i = 0; i < shortest.pathList.get(j).adjList.size(); i++) { // Shuffle through different links in each nodes' adjList
 				try{
 					if(shortest.pathList.get(j).adjList.get(i).destNode.equals(shortest.pathList.get(j+1))) { // If this link brings us to next destNode
-						labels.add(new Label("Take " + shortest.pathList.get(j).adjList.get(i).name + " for " + 
-								shortest.pathList.get(j).adjList.get(i).length + "km to " + shortest.pathList.get(j+1).data + ".")); // Add link to route
+						labels.add(new Label("Take " + shortest.pathList.get(j).adjList.get(i).name + " from " + shortest.pathList.get(j).data + " to " + 
+								shortest.pathList.get(j+1).data + " for " + shortest.pathList.get(j).adjList.get(i).length + "km.")); // Add link to route
 					}
 				}catch(IndexOutOfBoundsException ex){}
 			}

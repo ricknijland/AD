@@ -91,8 +91,8 @@ public class Main extends Application {
 		        } 
 		        // Add to label for shortCities and route
         		shortCities.setText(sourceTextField.getText() + " | " + destTextField.getText());
-        		List<Label> temp = paths.getShortestRouteString();
         		if(path != null) { // Path found
+        			List<Label> temp = paths.getShortestRouteString();
         			for(int i = 0; i < temp.size(); i++) {
         				directions.getChildren().add(temp.get(i));
         			}
@@ -145,8 +145,8 @@ public class Main extends Application {
 		        }
 		        // Add to label to quickCities and route
         		quickCities.setText(sourceTextField2.getText() + " | " + destTextField2.getText());
-        		List<Label> temp = paths.getQuickestRouteString();
         		if(path != null) { // Path found
+        			List<Label> temp = paths.getQuickestRouteString();
         			for(int i = 0; i < temp.size(); i++) {
         				directions.getChildren().add(temp.get(i));
         			}
