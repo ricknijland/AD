@@ -12,6 +12,7 @@ public class Paths {
 	protected CityList nodes;
 	private Dijkstra dijkstra = new Dijkstra();
 	private CostedPath shortest, quickest;
+	private List<CostedPath> multi;
 	
 	// Default Constructor
 	public Paths() { 
@@ -67,6 +68,39 @@ public class Paths {
 		}
 		
 		return quickest;
+	}
+	
+	// Method to find quickest route
+	public List<CostedPath> findMultiplePaths(String startNode, String destNode, int pathNum) {
+		multi = new ArrayList<>();
+		
+		// Check to throw exception
+		if(nodes.get(startNode) == (null) || nodes.get(destNode) == (null)) {
+			return null;
+		}
+		
+//		if(!waypoints.isEmpty()) { // If there are waypoints that need to be hit on route
+//			List<CostedPath> paths = new ArrayList<>(); // List to hold all CostedPaths to be added together
+//			waypoints.add(0, startNode); // Add to front
+//			waypoints.add(destNode); // Add to end
+//			
+//			// Find the path using each waypoint
+//			for(int i = 1; i < waypoints.size(); i++) {
+//				paths.add(dijkstra.findQuickestPath(nodes.get(waypoints.get(i-1)), nodes.get(waypoints.get(i)).data, avoidNodes, avoidLinks));
+//			}
+//			// Add all paths to one valid path
+//			for(CostedPath path : paths) {
+//				if(!path.equals(paths.get(0))) path.pathList.remove(0); // Removes first node, since it will repeat with next CostedPath
+//				multi.pathCost += path.pathCost;
+//				multi.pathList.addAll(path.pathList);
+//			}
+//			
+//		}
+//		else { // If only 2 nodes to find route for
+		multi = dijkstra.findMultiplePaths(nodes.get(startNode), destNode, avoidNodes, avoidLinks, pathNum);
+//		}
+		
+		return multi;
 	}
 	
 	// Method to find shortest route
@@ -142,6 +176,36 @@ public class Paths {
 		// Total then add to route Label in Main
 		labels.add(new Label(""));
 		labels.add(new Label("Total distance: ~" + (int)shortest.pathCost + " km."));
+		
+		return labels;
+	}
+	
+	// Method to return String for route Label
+	public List<Label> getMultipleRoutesString(int pathNums) {
+		List<Label> labels = new ArrayList<>();
+		if(multi == null) {
+			labels.add(new Label("Too many paths or couldn't find path."));
+			return labels;
+		}
+		
+		// Print out nodes and links
+		for(int k = 0; k < pathNums; k++) {
+			labels.add(new Label("Path " + (k+1) + ":"));
+			for(int j = 0; j < multi.get(k).pathList.size(); j++) { // Cycles thru each node
+				for(int i = 0; i < multi.get(k).pathList.get(j).adjList.size(); i++) { // Shuffle through different links in each nodes' adjList
+					try{
+						if(multi.get(k).pathList.get(j).adjList.get(i).destNode.equals(multi.get(k).pathList.get(j+1))) { // If this link brings us to next destNode
+							labels.add(new Label("Take " + multi.get(k).pathList.get(j).adjList.get(i).name + " from " + multi.get(k).pathList.get(j).data + " to " + 
+									multi.get(k).pathList.get(j+1).data + " for " + multi.get(k).pathList.get(j).adjList.get(i).length + "km.")); // Add link to route
+						}
+					}catch(IndexOutOfBoundsException ex){}
+				}
+			}
+			// Total then get next directions
+			labels.add(new Label(""));
+			labels.add(new Label("Total time: ~" + (int)multi.get(k).pathCost + " minutes [~" + (int)multi.get(k).pathCost/60 + " hour(s) and "+ (int)multi.get(k).pathCost%60 + " minutes]."));
+			labels.add(new Label(""));
+		}
 		
 		return labels;
 	}

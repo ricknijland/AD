@@ -35,6 +35,7 @@ public class Main extends Application {
 	static Label waypointlist = new Label();
 	static Label shortCities = new Label();
 	static Label quickCities = new Label();
+	static Label multiCities = new Label();
 	static VBox directions = new VBox(); // needed here for being able to use it higher up in code
 
 	public static void main(String[] args) throws FileNotFoundException {
@@ -52,7 +53,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		BorderPane root = new BorderPane();
 		root.setCenter(graph.getScrollPane());
-		Scene scene = new Scene(root, 1076, 700);
+		Scene scene = new Scene(root, 1200, 700);
 		HBox splitScreen = new HBox(); // Split upper part into textfields and results of textfields
 		
 		// HBox to hold all textfields
@@ -164,6 +165,74 @@ public class Main extends Application {
 		HBox hb2 = new HBox(quickBox, source2Box, destBoxNButton2);
 		// -----------------------------------------END OF HB2------------------------------------------------
 		
+		// -----------------------------------------START OF HB3------------------------------------------------
+		Label multi = new Label("Finds multiple quickest paths:   ");
+		HBox multiBox = new HBox(multi);
+		multiBox.setPadding(new Insets(5, 5, 0, 5));
+		
+		Label source3 = new Label("Source: ");
+		TextField sourceTextField3 = new TextField();
+		sourceTextField3.setPromptText("Waypoint not supported");
+		HBox source3Box = new HBox(source3, sourceTextField3);
+		source3Box.setPadding(new Insets(5, 5, 0, 5));
+		
+		Label destination3 = new Label("Destination: ");
+		TextField destTextField3 = new TextField();
+		destTextField3.setPromptText("Waypoint not supported");
+		Button button3 = new Button("Calculate routes");
+		HBox destBoxNButton3 = new HBox(destination3, destTextField3, button3);
+		destBoxNButton3.setPadding(new Insets(5, 5, 0, 5));
+		
+		Label numRoutes = new Label("# of Routes: ");
+		TextField number = new TextField();
+		number.setText("1"); // Set default number
+		number.setMaxWidth(30);
+		HBox numRoutesBox = new HBox(numRoutes, number);
+		numRoutesBox.setPadding(new Insets(5, 5, 0, 5));
+		
+		//Setting an action for the Submit button
+		button3.setOnAction(new EventHandler<ActionEvent>() {
+
+		@Override
+		    public void handle(ActionEvent e) {
+				int pathNum = number.getText().equals("") ? 0 : Integer.parseInt(number.getText());
+		        if ((sourceTextField3.getText() != null && !sourceTextField3.getText().isEmpty())) {
+		        	if((destTextField3.getText() != null && !destTextField3.getText().isEmpty())) {
+		        		if(!waypoints.isEmpty()) { // Not supported
+		        			return;
+		        		}
+		        		clearPath(); // If path already created
+		        		directions.getChildren().clear(); // Remove earlier directions
+		        		paths = new Paths(avoidNodes, avoidLinks, waypoints);
+		        		List<CostedPath> multiList = paths.findMultiplePaths(sourceTextField3.getText(), destTextField3.getText(), pathNum);
+		        		if(multiList != null) { // Path found
+		        			for(int i = 0; i < multiList.size(); i++) { // Set each CostedPath to path variable to show nodes
+		        				path = multiList.get(i);
+		        				showPath(); // Show path on GUI
+		        			}
+		        		}
+		        	} 
+		        }
+		        // Add to label to quickCities and route
+        		multiCities.setText(sourceTextField3.getText() + " | " + destTextField3.getText());
+        		if(path != null) { // Path found
+        			List<Label> temp = paths.getMultipleRoutesString(pathNum);
+        			for(int i = 0; i < temp.size(); i++) {
+        				directions.getChildren().add(temp.get(i));
+        			}
+        		}
+        		else { // No path found
+        			directions.getChildren().add(new Label("No path found for specified cities."));
+        		}
+        		
+        		// Reset fields
+		        sourceTextField2.clear(); // Clear TextField
+        		destTextField2.clear(); // Clear TextField
+		     }
+		 });
+		
+		HBox hb3 = new HBox(multiBox, numRoutesBox, source3Box, destBoxNButton3);
+		// -----------------------------------------END OF HB3------------------------------------------------
 		
 		// -----------------------------------------START OF AVOID------------------------------------------------
 		Label avoidLinksText = new Label("Roads to avoid: ");
@@ -232,7 +301,7 @@ public class Main extends Application {
 		
 		
 		//----------------------------------------START OF WAYPOINT-----------------------------------
-		Label waypointText = new Label("Cities to pass thru: ");
+		Label waypointText = new Label("Cities to pass thru (in-order): ");
 		TextField waypointTextField = new TextField();
 		waypointTextField.setPromptText("Separate by (,)");
 		Button waypointButton = new Button("Add Cities");
@@ -286,7 +355,11 @@ public class Main extends Application {
 		
 		Label quicks = new Label("Cities chosen: ");
 		HBox quicksBox = new HBox(quicks, quickCities);
-		quicksBox.setPadding(new Insets(10, 5, 5, 5));
+		quicksBox.setPadding(new Insets(5, 5, 5, 5));
+		
+		Label multis = new Label("Cities chosen: ");
+		HBox multisBox = new HBox(multis, multiCities);
+		multisBox.setPadding(new Insets(10, 5, 5, 5));
 		
 		//---------------------------------------END OF SECOND VBOX----------------------------------------------
 		
@@ -305,10 +378,10 @@ public class Main extends Application {
 		
 		
 		//-----------------------------------------SET UP GUI----------------------------------------------------
-		VBox vb2 = new VBox(avoidlistBox, waypointlistBox, shortsBox, quicksBox);
+		VBox vb2 = new VBox(avoidlistBox, waypointlistBox, shortsBox, quicksBox, multisBox);
 		vb2.setPadding(new Insets(0, 0, 0, 10));
 		
-		vb.getChildren().addAll(avoid, waypoint, hb1, hb2);
+		vb.getChildren().addAll(avoid, waypoint, hb1, hb2, hb3);
 		splitScreen.getChildren().addAll(vb, vb2);
 		root.setTop(splitScreen);
 		root.setBottom(routeScroll);
