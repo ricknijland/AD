@@ -119,6 +119,7 @@ public class Main extends Application {
 		
 		Label source2 = new Label("Source: ");
 		TextField sourceTextField2 = new TextField();
+		
 		HBox source2Box = new HBox(source2, sourceTextField2);
 		source2Box.setPadding(new Insets(5, 5, 5, 5));
 		

@@ -145,8 +145,8 @@ public class Paths {
 			for(int i = 0; i < quickest.pathList.get(j).adjList.size(); i++) { // Shuffle through different links in each nodes' adjList
 				try{
 					if(quickest.pathList.get(j).adjList.get(i).destNode.equals(quickest.pathList.get(j+1))) { // If this link brings us to next destNode
-						labels.add(new Label("Take " + quickest.pathList.get(j).adjList.get(i).name + " from " + quickest.pathList.get(j).data + " to " + 
-								quickest.pathList.get(j+1).data + " for " + quickest.pathList.get(j).adjList.get(i).length + "km.")); // Add link to route
+						labels.add(new Label("Take " + quickest.pathList.get(j).adjList.get(i).name + " for " + quickest.pathList.get(j).adjList.get(i).length +
+							"km from " + quickest.pathList.get(j).data + " to " + quickest.pathList.get(j+1).data + ".")); // Add link to route
 					}
 				}catch(IndexOutOfBoundsException ex){}
 			}
@@ -158,7 +158,7 @@ public class Paths {
 		return labels;
 	}
 		
-	// Method to return String for route Label
+	// Method to return list of directions for route
 	public List<Label> getShortestRouteString() {
 		List<Label> labels = new ArrayList<>();
 		
@@ -167,8 +167,8 @@ public class Paths {
 			for(int i = 0; i < shortest.pathList.get(j).adjList.size(); i++) { // Shuffle through different links in each nodes' adjList
 				try{
 					if(shortest.pathList.get(j).adjList.get(i).destNode.equals(shortest.pathList.get(j+1))) { // If this link brings us to next destNode
-						labels.add(new Label("Take " + shortest.pathList.get(j).adjList.get(i).name + " from " + shortest.pathList.get(j).data + " to " + 
-								shortest.pathList.get(j+1).data + " for " + shortest.pathList.get(j).adjList.get(i).length + "km.")); // Add link to route
+						labels.add(new Label("Take " + shortest.pathList.get(j).adjList.get(i).name + " for " + shortest.pathList.get(j).adjList.get(i).length + 
+							"km from " + shortest.pathList.get(j).data + " to " + shortest.pathList.get(j+1).data + ".")); // Add link to route
 					}
 				}catch(IndexOutOfBoundsException ex){}
 			}
@@ -180,7 +180,7 @@ public class Paths {
 		return labels;
 	}
 	
-	// Method to return String for route Label
+	// Method to return list of directions for route
 	public List<Label> getMultipleRoutesString(int pathNums) {
 		List<Label> labels = new ArrayList<>();
 		if(multi == null) {
@@ -195,8 +195,8 @@ public class Paths {
 				for(int i = 0; i < multi.get(k).pathList.get(j).adjList.size(); i++) { // Shuffle through different links in each nodes' adjList
 					try{
 						if(multi.get(k).pathList.get(j).adjList.get(i).destNode.equals(multi.get(k).pathList.get(j+1))) { // If this link brings us to next destNode
-							labels.add(new Label("Take " + multi.get(k).pathList.get(j).adjList.get(i).name + " from " + multi.get(k).pathList.get(j).data + " to " + 
-									multi.get(k).pathList.get(j+1).data + " for " + multi.get(k).pathList.get(j).adjList.get(i).length + "km.")); // Add link to route
+							labels.add(new Label("Take " + multi.get(k).pathList.get(j).adjList.get(i).name + " for " + multi.get(k).pathList.get(j).adjList.get(i).length + 
+								"km from " + multi.get(k).pathList.get(j).data + " to " + multi.get(k).pathList.get(j+1).data + ".")); // Add link to route
 						}
 					}catch(IndexOutOfBoundsException ex){}
 				}
