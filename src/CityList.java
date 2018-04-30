@@ -65,7 +65,7 @@ public class CityList {
 	
 	public GraphNode<?> getNodeWithString(String name) {
 		for(int i = 0; i < nodes.size(); i++) {
-			if(name.equals(nodes.get(i).data));
+			if(name.equalsIgnoreCase(nodes.get(i).data));
 				return nodes.get(i); 
 		}
 		return null;
